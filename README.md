@@ -53,19 +53,19 @@
 >>## 修改密码  
 >>>`passwd root`  
 >>>`passwd ubuntu`   
->>>可以增加另一个用户
->>>'adduser abcgadmin'
->>>'usermod -aG sudo abcgadmin'
->>>'su - abcgadmin'
->>>'error solution:'
->>>'sudo: no tty present and no askpass program specified'
->>>'go to /etc/sudoers.d/'
->>>create a file name as new user name, and file content is below:
+>>>可以增加另一个用户   
+>>>'adduser abcgadmin'   
+>>>'usermod -aG sudo abcgadmin'   
+>>>'su - abcgadmin'   
+>>>'error solution:'   
+>>>'sudo: no tty present and no askpass program specified'   
+>>>'go to /etc/sudoers.d/'   
+>>>create a file name as new user name, and file content is below:   
 
->>># User rules for ubuntu
->>>abcgadmin ALL=(ALL) NOPASSWD:ALL
+>>># User rules for ubuntu   
+>>>abcgadmin ALL=(ALL) NOPASSWD:ALL   
 
->>>abcgadmin is the user name
+>>>abcgadmin is the user name   
 >>>容器里的ubuntu是一个很精简的系统，需要安装各种软件  
 >>## 安装ssh  
 >>>`apt install ssh`  
@@ -133,25 +133,25 @@
 >>>添加好显卡后，就相当于我们给容器安装了显卡，我们回到容器，然后安装显卡驱动    
 >>>与宿主机的显卡版本必须一致，安装方法参考第一步NVIDIA显卡驱动、CUDN、cuDNN的安装  
 >>>需要注意的是容器里面安装显卡驱动时需要加上后面的参数，安装时不需要安装到内核  
->>>>`sudo sh ./NVIDIA-Linux-X86_64-[YOURVERSION].run --no-kernel-module`
->>>参考https://tutorials.ubuntu.com/tutorial/gpu-data-processing-inside-lxd#3
->>>https://ai.atamai.biz/post/install-ubuntu/
->>>sudo sh ./NVIDIA-Linux-x86_64-418.87.01.run --no-kernel-module
->>>过程中选择默认即可
->>>安装后，测试以下命令：
->>>nvidia-smi
->>>如果显示驱动版本号及显卡，安装成功
->>>安装cuda toolkit 10.1
->>>下载地址https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal,
->>>sudo sh cuda_10.1.243_418.87.00_linux.run
->>>安装完成后，编辑./bashrc 文件， add 以下两行在最后。
->>>export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
->>>export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+>>>>`sudo sh ./NVIDIA-Linux-X86_64-[YOURVERSION].run --no-kernel-module`   
+>>>参考https://tutorials.ubuntu.com/tutorial/gpu-data-processing-inside-lxd#3   
+>>>https://ai.atamai.biz/post/install-ubuntu/   
+>>>sudo sh ./NVIDIA-Linux-x86_64-418.87.01.run --no-kernel-module   
+>>>过程中选择默认即可   
+>>>安装后，测试以下命令：   
+>>>nvidia-smi   
+>>>如果显示驱动版本号及显卡，安装成功   
+>>>安装cuda toolkit 10.1   
+>>>下载地址https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal,   
+>>>sudo sh cuda_10.1.243_418.87.00_linux.run   
+>>>安装完成后，编辑./bashrc 文件， add 以下两行在最后。   
+>>>export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}   
+>>>export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}   
 
->>>安装后，测试以下命令：
->>>nvcc -V
->>>/usr/local/cuda-10.0/extras/demo_suite/bandwidthTest
->>>如果显示Result = PASS, 安装成功
+>>>安装后，测试以下命令：   
+>>>nvcc -V   
+>>>/usr/local/cuda-10.0/extras/demo_suite/bandwidthTest   
+>>>如果显示Result = PASS, 安装成功   
 
 ># 第五步：ubuntu的美化等配置  
 >>## icon图标主题  
