@@ -54,18 +54,18 @@
 >>>`passwd root`  
 >>>`passwd ubuntu`   
 >>>可以增加另一个用户
->>>adduser abcgadmin
->>>usermod -aG sudo abcgadmin
->>>su - abcgadmin
->>>error solution:
->>>sudo: no tty present and no askpass program specified
->>>go to /etc/sudoers.d/
+>>>'adduser abcgadmin'
+>>>'usermod -aG sudo abcgadmin'
+>>>'su - abcgadmin'
+>>>'error solution:'
+>>>'sudo: no tty present and no askpass program specified'
+>>>'go to /etc/sudoers.d/'
 >>>create a file name as new user name, and file content is below:
 
-# User rules for ubuntu
-abcgadmin ALL=(ALL) NOPASSWD:ALL
+>>># User rules for ubuntu
+>>>abcgadmin ALL=(ALL) NOPASSWD:ALL
 
-abcgadmin is the user name
+>>>abcgadmin is the user name
 >>>容器里的ubuntu是一个很精简的系统，需要安装各种软件  
 >>## 安装ssh  
 >>>`apt install ssh`  
@@ -135,14 +135,14 @@ abcgadmin is the user name
 >>>需要注意的是容器里面安装显卡驱动时需要加上后面的参数，安装时不需要安装到内核  
 >>>>`sudo sh ./NVIDIA-Linux-X86_64-[YOURVERSION].run --no-kernel-module`
 >>>参考https://tutorials.ubuntu.com/tutorial/gpu-data-processing-inside-lxd#3
->>>sudo sh ./NVIDIA-Linux-x86_64-418.87.01.run --no-kernel-module
 >>>https://ai.atamai.biz/post/install-ubuntu/
+>>>sudo sh ./NVIDIA-Linux-x86_64-418.87.01.run --no-kernel-module
 >>>过程中选择默认即可
 >>>安装后，测试以下命令：
 >>>nvidia-smi
 >>>如果显示驱动版本号及显卡，安装成功
 >>>安装cuda toolkit 10.1
->>>https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal,下载地址
+>>>下载地址https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal,
 >>>sudo sh cuda_10.1.243_418.87.00_linux.run
 >>>安装完成后，编辑./bashrc 文件， add 以下两行在最后。
 >>>export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
