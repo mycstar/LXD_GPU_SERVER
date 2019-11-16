@@ -43,14 +43,9 @@
 >>>![my-logo.png](image/图片4.png "my-logo")  
 
 ># 第三步：容器的创建  
->>## 加速源  
->>>### 使用清华的镜像源（加速创建）  
->>>>`sudo lxc remote add tuna-images https://mirrors.tuna.tsinghua.edu.cn/lxc-images/ --protocol=simplestreams --public`  
->>>### 列出可用的镜像  
->>>>`sudo lxc image list tuna-images: ` 
 >>## 创建ubuntu容器  
 >>>### 使用清华源中的ubuntu镜像创建一个叫test的容器  
->>>>`sudo lxc launch tuna-images:ubuntu/18.04 test`  
+>>>>`sudo lxc launch ubuntu:18.04 test`  
 >>## 进入容器  
 >>>`sudo lxc exec test bash`  
 >>>
@@ -58,7 +53,19 @@
 >>## 修改密码  
 >>>`passwd root`  
 >>>`passwd ubuntu`   
->>>
+>>>可以增加另一个用户
+>>>adduser abcgadmin
+>>>usermod -aG sudo abcgadmin
+>>>su - abcgadmin
+>>>error solution:
+>>>sudo: no tty present and no askpass program specified
+>>>go to /etc/sudoers.d/
+>>>create a file name as new user name, and file content is below:
+
+# User rules for ubuntu
+abcgadmin ALL=(ALL) NOPASSWD:ALL
+
+abcgadmin is the user name
 >>>容器里的ubuntu是一个很精简的系统，需要安装各种软件  
 >>## 安装ssh  
 >>>`apt install ssh`  
@@ -82,23 +89,6 @@
 ># 第四步：容器的配置  
 >>## ssh连接容器并配置  
 >>>`ssh ubuntu@172.22.24.126 -p 60601`
->>## 1. 更换源  
->>>### 备份原来的源  
->>>>`sudo mv /etc/apt/sources.list  /etc/apt/sources.list.bak`  
->>>### 编辑写入网易源  
->>>### （注意系统版本 ubuntu 18.04）  
->>>>`sudo vim /etc/apt/sources.list`  
->>>```
->>>deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
->>>deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
->>>deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
->>>deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
->>>deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
->>>deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
->>>deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
->>>deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
->>>deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
->>>deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
 >>>```  
 >>## 2. 安装图形化界面  
 >>>### 刷新源
@@ -144,6 +134,24 @@
 >>>与宿主机的显卡版本必须一致，安装方法参考第一步NVIDIA显卡驱动、CUDN、cuDNN的安装  
 >>>需要注意的是容器里面安装显卡驱动时需要加上后面的参数，安装时不需要安装到内核  
 >>>>`sudo sh ./NVIDIA-Linux-X86_64-[YOURVERSION].run --no-kernel-module`
+>>>参考https://tutorials.ubuntu.com/tutorial/gpu-data-processing-inside-lxd#3
+>>>sudo sh ./NVIDIA-Linux-x86_64-418.87.01.run --no-kernel-module
+>>>https://ai.atamai.biz/post/install-ubuntu/
+>>>过程中选择默认即可
+>>>安装后，测试以下命令：
+>>>nvidia-smi
+>>>如果显示驱动版本号及显卡，安装成功
+>>>安装cuda toolkit 10.1
+>>>https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal,下载地址
+>>>sudo sh cuda_10.1.243_418.87.00_linux.run
+>>>安装完成后，编辑./bashrc 文件， add 以下两行在最后。
+>>>export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
+>>>export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+>>>安装后，测试以下命令：
+>>>nvcc -V
+>>>/usr/local/cuda-10.0/extras/demo_suite/bandwidthTest
+>>>如果显示Result = PASS, 安装成功
 
 ># 第五步：ubuntu的美化等配置  
 >>## icon图标主题  
