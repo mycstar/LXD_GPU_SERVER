@@ -44,7 +44,7 @@
 
 ># 第三步：容器的创建  
 >>## 创建ubuntu容器  
->>>### 使用清华源中的ubuntu镜像创建一个叫test的容器  
+>>>### 创建一个叫test的容器  
 >>>>`sudo lxc launch ubuntu:18.04 test`  
 >>## 进入容器  
 >>>`sudo lxc exec test bash`  
