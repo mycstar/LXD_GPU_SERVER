@@ -93,8 +93,8 @@
 >>## 2. 安装图形化界面  
 >>>### 刷新源
 >>>>`sudo apt update`  
->>>### 完整安装ubuntu桌面(默认安装gnome，不过会有很多无关的软件)
->>>>`sudo apt install ubuntu-desktop`
+>>>### 安装无推荐软件的ubuntu桌面(默认安装gnome，完整安装会有很多无关的软件)
+>>>>`sudo apt install --no-install-recommends ubuntu-desktop`
 >>>### 或者最小化安装gnome桌面
 >>>>`sudo apt install gnome-shell gnome-session gnome-panel gnome-terminal -y`
 >>## 3.安装远程连接  
